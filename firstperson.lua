@@ -117,12 +117,12 @@ function m:collide_and_slide(position, trajectory, is_gravity_pass, recursion_de
 
   local direction = vec3(trajectory):normalize()
   local target = position + direction * (#trajectory + m.SKIN_THICKNESS)
-  local collider, shape, x, y, z, nx, ny, nz, fraction
+  local collider, shape, x, y, z, nx, ny, nz, triangle, fraction
 
   self.world:shapecast(casting_sphere,
     position, target, quat(-math.pi / 2, 1,0,0), '~torso',
     function(...)
-      collider, shape, x, y, z, nx, ny, nz, fraction  = ...
+      collider, shape, x, y, z, nx, ny, nz, triangle, fraction  = ...
       return 0
     end)
 
