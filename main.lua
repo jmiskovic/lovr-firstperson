@@ -1,14 +1,8 @@
 local character_controller = require'character-controller'
 
 lovr.system.setMouseMode('relative')
--- for 3rd person camera: character_controller.CAMERA_OFFSET = vector(0, 0.5, 4)
 
-local world = lovr.physics.newWorld({
-  allowSleep = false,
-  maxPenetration = 5e-3,
-  tags = {'character'}
-})
-
+local world = lovr.physics.newWorld()
 
 local gym = lovr.data.newModelData('gym.glb')
 local gym_model = lovr.graphics.newModel(gym)
@@ -41,4 +35,5 @@ function lovr.draw(pass)
   character:setCamera(pass)
   pass:draw(gym_model)
   pass:box(vector(elevator:getPosition()), vector(elevator:getShape():getDimensions()))
+  -- player geometry: pass:cylinder(character.pos - vector(0, character.height / 2, 0), character.pos + vector(0, character.height / 2, 0), character_controller.CAPSULE_WIDTH)
 end
