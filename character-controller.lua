@@ -6,6 +6,7 @@ m.CAPSULE_HEIGHT = 1.7
 m.CROUCH_HEIGHT = 1.0
 m.EYE_DROP = 0.05                     -- from head top to eye level
 m.TURNING_SENSITIVITY = 0.001
+m.MAX_PITCH = math.rad(89)
 m.WALKING_SPEED = 4
 m.RUNNING_SPEED = 8
 m.CROUCHING_SPEED = 2.5
@@ -228,6 +229,7 @@ function m:update(delta)
   self.mx_prev, self.my_prev = mx, my
   self.yaw   = self.yaw   - dx * m.TURNING_SENSITIVITY
   self.pitch = self.pitch - dy * m.TURNING_SENSITIVITY
+  self.pitch = math.min(m.MAX_PITCH, math.max(-m.MAX_PITCH, self.pitch))
 
   local input_vel = vector()
   if lovr.system.isKeyDown('w', 'up') then
